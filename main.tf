@@ -1,3 +1,4 @@
+// Deploying a VPC
 resource "aws_vpc" "mypr_vpc" {
   cidr_block           = "172.31.0.0/16"
   enable_dns_hostnames = true
@@ -75,6 +76,13 @@ resource "aws_security_group" "mypr_secgr" {
     protocol    = "-1"
     cidr_blocks = ["0.0.0.0/0"] // can put here (whatmyip) own ip address or the addresses that you want to access the site
 
+  }
+  ingress { 
+    description = "HTTP"
+    from_port = 80
+    to_port = 80
+    protocol = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
   }
   egress {
     from_port   = 0
